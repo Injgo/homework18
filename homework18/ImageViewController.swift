@@ -53,13 +53,29 @@ class ImageViewController: UIViewController {
         }
     }
     
+
     
     @objc func pinchRecognized (_ sender: UIPinchGestureRecognizer) {
-        sender.view?.transform = (sender.view?.transform)!.scaledBy(x: sender.scale, y: sender.scale)
-        sender.scale = 1
+        
         
         let information = ["color": UIColor.yellow]
         NotificationCenter.default.post(name: Notification.Name("com.homeWork18.Notification.colorChange"), object: nil, userInfo: information)
+        
+    
+        sender.view?.transform = (sender.view?.transform)!.scaledBy(x: sender.scale, y: sender.scale)
+        
+        let guide = view.safeAreaLayoutGuide
+        let width = guide.layoutFrame.size.width
+
+       
+        sender.scale = 1
+        
+        if Img.frame.width > width {
+            self.Img.transform = CGAffineTransform.identity
+        }
+        
+        
+        
         
     }
     
